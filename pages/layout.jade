@@ -1,0 +1,29 @@
+doctype 5
+
+case active
+  when '/'
+    homeClass = 'active'
+    aboutClass = ''
+    projectClass = ''
+  when 'about'
+    homeClass = ''
+    aboutClass = 'active'
+    projectClass = ''
+  when 'project'
+    homeClass = ''
+    aboutClass = ''
+    projectClass = 'active'
+
+html( lang="en" )
+  head
+    title=pageTitle
+  body
+    ul
+      li(class=homeClass)
+        a( href='/' ) home
+      li(class=aboutClass)
+        a( href='about' ) about
+      li(class=projectClass)
+        a( href='projects' ) projects
+    .container
+      block content
