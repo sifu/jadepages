@@ -4,11 +4,14 @@ var jade = require( 'jade' );
 var path = require( 'path' );
 var fs = require( 'fs' );
 var mkdirp = require( 'mkdirp' );
+var argv = require( 'optimist' )
+  .usage( 'Usage: $0 -i -o' )
+  .demand( [ 'i', 'o' ] ).argv;
 
 var globals = require( path.join( __dirname, 'pages', 'globals' ) );
 
-var inputPath = path.join( __dirname, 'pages' );
-var outputPath = path.join( __dirname, 'output' );
+var inputPath = argv.i;
+var outputPath = argv.o;
 
 function copy( obj ) {
   return JSON.parse( JSON.stringify( obj ) );
@@ -22,7 +25,7 @@ function process( directory ) {
       locals[ key ] = options[ key ];
     }
     fs.readFile( path.join( directory, 'index.jade' ), 'utf-8', function( err, content ) {
-      var relative = path.relative( __dirname, directory );
+      var relative = path.relative( inputPath, directory );
       var outputDir = path.join( outputPath, relative );
       var outputFile = path.join( outputDir, 'index.html' );
       var html = jade.compile( content, { pretty: true, filename: path.join( directory, 'index.jade' ) } )( locals );
