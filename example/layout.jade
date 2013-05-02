@@ -9,10 +9,10 @@ case active
     homeClass = ''
     aboutClass = 'active'
     projectClass = ''
-  when 'project'
+  when 'advanced'
     homeClass = ''
     aboutClass = ''
-    projectClass = 'active'
+    advancedClass = 'active'
 
 html( lang="en" )
   head
@@ -23,7 +23,7 @@ html( lang="en" )
         a( href='/' ) home
       li(class=aboutClass)
         a( href='about' ) about
-      li(class=projectClass)
-        a( href='projects' ) projects
+      li(class=advancedClass)
+        a( href='advanced' ) advanced
     .container
       block content
